@@ -11,16 +11,10 @@
         <li class="nav-item">
           <router-link to="/login" class="nav-link">Login</router-link>
         </li>
-        <!-- <li class="nav-item">
-          <router-link to="/productList" class="nav-link"
-            >Product List</router-link
-          >
+          <li class="nav-item">
+          <router-link to="/productList" class="nav-link">ProductList</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/addProduct" class="nav-link"
-            >Add Product</router-link
-          >
-        </li> -->
+       
       </div>
     </nav>
 

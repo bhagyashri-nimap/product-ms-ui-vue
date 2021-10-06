@@ -64,7 +64,8 @@ export default {
       TutorialDataService.login(data)
         .then((response) => {
           console.log(response.data);
-           this.submitted = true;
+           TutorialDataService.setUserAccess(response.data.accessToken);
+             this.$router.push({ name: "productList" });
         })
         .catch((e) => {
           console.log(e);

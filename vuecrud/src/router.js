@@ -19,6 +19,11 @@ const routes = [{
         name: "login",
         component: () => import("./components/Login")
     }, 
+    {
+        path: "/productList",
+        name: "productList",
+        component: () => import("./components/ProductList")
+    }, 
 ];
 
 const router = createRouter({
