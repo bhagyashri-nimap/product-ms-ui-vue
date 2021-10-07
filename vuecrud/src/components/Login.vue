@@ -33,7 +33,7 @@
                       :to="{ name: 'productList' }"
                       append
                     >
-                      <button @click="userLogin" class="registerbtn">Login</button>
+                      <button @click="userLogin" class="loginbut">Login</button>
                     </router-link>
    
     </div>
@@ -76,7 +76,7 @@ export default {
 };
 </script>
 <style>
-.registerbtn {
+.loginbut {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;

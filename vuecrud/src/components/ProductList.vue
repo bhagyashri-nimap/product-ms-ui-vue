@@ -1,10 +1,12 @@
 <template><table id="firstTable">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Profession</th>
+      <th>ProductSku</th>
+      <th>ProductName</th>
+      <th>PriceIndia</th>
+      <th>PriceUsa</th>
+      <th>Purchase from India</th>
+      <th>Purchase from Usa</th>
     </tr>
   </thead>
   <tbody>
@@ -13,49 +15,72 @@
       <td>sasa</td>
       <td>sdsd</td>
       <td>dfdsfs</td>
+      <td><button class="register">India</button></td>
+      <td><button class="register">Usa</button></td>
     </tr>
   </tbody>
 </table>
+<button class="registerbtn" @click="logout">logout</button>
 </template>
 <script>
-// import TutorialDataService from "../services/DataService";
-// export default {
-//   data() {
-//     return {
-//       user: {
-//         email: "",
-//         password:""
-//       },
-//       submitted: false,
-//     };
-//   },
-//   methods: {
-//     // userLogin() {
-//     //   console.log("data================")
-//     //   var data = {
-//     //     email: this.user.email,
-//     //     password:this.user.password
-//     //   };
-//     //   console.log("data",data)
-//     //   TutorialDataService.login(data)
-//     //     .then((response) => {
-//     //       console.log(response.data);
-//     //        TutorialDataService.setUserAccess(response.data.accessToken);
-//     //          this.$router.push({ name: "productList" });
-//     //     })
-//     //     .catch((e) => {
-//     //       console.log(e);
-//     //     });
-//     // },
+import TutorialDataService from "../services/DataService";
+export default {
+  data() {
+    return {
+      user: {
+        email: "",
+        password:""
+      },
+      submitted: false,
+    };
+  },
+  methods: {
+    userLogin() {
+      console.log("data================")
+      var data = {
+        email: this.user.email,
+        password:this.user.password
+      };
+      console.log("data",data)
+      TutorialDataService.login(data)
+        .then((response) => {
+          console.log(response.data);
+           TutorialDataService.setUserAccess(response.data.accessToken);
+             this.$router.push({ name: "productList" });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
 
-//     // addedNew() {
-//     //   this.submitted = false;
-//     //   this.user = {};
-//     // },
-//   },
-// };
+    logout() {
+     TutorialDataService.removeUserAccess();
+      this.$router.replace({ name: "login" });
+    },
+  },
+};
 </script>
 <style>
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 10px;
+  margin: 3px 0;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  opacity: 0.9;
+}
+.register {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 10px;
+  margin: 3px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
 table {
   font-family: 'Open Sans', sans-serif;
   width: 750px;
