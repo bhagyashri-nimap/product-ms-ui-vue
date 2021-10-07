@@ -9,11 +9,6 @@ const routes = [{
         name: "registrations",
         component: () => import("./components/Registration")
     },
-    // {
-    //     path: "/get/:id",
-    //     name: "tutorial-details",
-    //     component: () => import("./components/Tutorial")
-    // },
     {
         path: "/login",
         name: "login",
