@@ -29,14 +29,15 @@
           name="Password"
         />
       </div>
-
-
-      <button @click="userLogin" class="registerbtn">Login</button>
+<router-link
+                      :to="{ name: 'productList' }"
+                      append
+                    >
+                      <button @click="userLogin" class="registerbtn">Login</button>
+                    </router-link>
+   
     </div>
-<!-- <div v-else>
-      <h4>User Register Successfully!</h4>
-      <button class="registerbtn" @click="addedNew">Add</button>
-    </div> -->
+
   
   </div>
 </template>
@@ -65,16 +66,11 @@ export default {
         .then((response) => {
           console.log(response.data);
            TutorialDataService.setUserAccess(response.data.accessToken);
-             this.$router.push({ name: "productList" });
+           
         })
         .catch((e) => {
           console.log(e);
         });
-    },
-
-    addedNew() {
-      this.submitted = false;
-      this.user = {};
     },
   },
 };
