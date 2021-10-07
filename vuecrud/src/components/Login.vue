@@ -2,9 +2,6 @@
    <div class="submit-form">
     <div v-if="!submitted">
        <h1>User Login</h1>
-   
-
-    
        <div class="form-group">
         <label for="description">Email</label>
         <input
@@ -16,8 +13,6 @@
           name="Email"
         />
       </div>
-      
-
  <div class="form-group">
         <label for="description">Password</label>
         <input
@@ -29,10 +24,10 @@
           name="Password"
         />
       </div>
-<router-link
+           <router-link
                       :to="{ name: 'productList' }"
                       append
-                    >
+            >
                       <button @click="userLogin" class="loginbut">Login</button>
                     </router-link>
    
