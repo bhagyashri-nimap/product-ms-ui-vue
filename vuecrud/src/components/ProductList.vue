@@ -24,37 +24,40 @@
 </template>
 <script>
 import TutorialDataService from "../services/DataService";
+import global from "../services/local";
 export default {
   data() {
     return {
-      user: {
-        email: "",
-        password:""
-      },
-      submitted: false,
+      allProduct: [],
     };
   },
+  created() {
+    TutorialDataService.getAllProduct(this.allProduct, data => {
+      this.allProduct = data.data;
+      
+    });
+  },
   methods: {
-    userLogin() {
-      console.log("data================")
-      var data = {
-        email: this.user.email,
-        password:this.user.password
-      };
-      console.log("data",data)
-      TutorialDataService.login(data)
-        .then((response) => {
-          console.log(response.data);
-           TutorialDataService.setUserAccess(response.data.accessToken);
-             this.$router.push({ name: "productList" });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    // userLogin() {
+    //   console.log("data================")
+    //   var data = {
+    //     email: this.user.email,
+    //     password:this.user.password
+    //   };
+    //   console.log("data",data)
+    //   TutorialDataService.login(data)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //        TutorialDataService.setUserAccess(response.data.accessToken);
+    //          this.$router.push({ name: "productList" });
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
 
     logout() {
-     TutorialDataService.removeUserAccess();
+     global.removeUserAccess();
       this.$router.replace({ name: "login" });
     },
   },

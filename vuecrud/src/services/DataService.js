@@ -1,5 +1,6 @@
 import http from "../http-common";
-import nuxtStorage from "nuxt-storage";
+
+import global from "../services/local";
 class DataService {
     create(data) {
         console.log("data",data)
@@ -9,15 +10,14 @@ class DataService {
         console.log("data",data)
         return http.post("/login", data);
     }
-    setUserAccess(data) {
-        nuxtStorage.localStorage.setData("userAccessToken", data, 365, "d");
-      }
-    getUserAccess() {
-        return nuxtStorage.localStorage.getData("userAccessToken");
-      }
-      removeUserAccess() {
-        nuxtStorage.localStorage.clear("userAccessToken");
-      }
+    getAllProduct(){
+      return http.get("/getAll", {
+        headers: {
+          accessToken: global.getUserAccess()
+        }
+      });
+    }
+    
  
 }
 

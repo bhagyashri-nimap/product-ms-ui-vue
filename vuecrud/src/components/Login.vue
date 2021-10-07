@@ -24,12 +24,9 @@
           name="Password"
         />
       </div>
-           <router-link
-                      :to="{ name: 'productList' }"
-                      append
-            >
+          
                       <button @click="userLogin" class="loginbut">Login</button>
-                    </router-link>
+                   
    
     </div>
 
@@ -39,6 +36,7 @@
 
 <script>
 import TutorialDataService from "../services/DataService";
+import global from "../services/local";
 export default {
   data() {
     return {
@@ -51,7 +49,6 @@ export default {
   },
   methods: {
     userLogin() {
-      console.log("data================")
       var data = {
         email: this.user.email,
         password:this.user.password
@@ -59,12 +56,15 @@ export default {
       console.log("data",data)
       TutorialDataService.login(data)
         .then((response) => {
-          console.log(response.data);
-           TutorialDataService.setUserAccess(response.data.accessToken);
-           
+          console.log("accessToken",response.data.accessToken);
+          if(response.data.accessToken){
+           global.setUserAccess(response.data.accessToken);
+           this.$router.push({ name: "productList" });
+          }
         })
         .catch((e) => {
-          console.log(e);
+          console.log(e)
+          alert("Incorrect Username or Password!!");
         });
     },
   },
