@@ -23,14 +23,9 @@
           v-model="user.password"
           name="Password"
         />
-      </div>
-          
-                      <button @click="userLogin" class="loginbut">Login</button>
-                   
-   
+      </div>    
+     <button @click="userLogin" class="loginbut">Login</button>
     </div>
-
-  
   </div>
 </template>
 
