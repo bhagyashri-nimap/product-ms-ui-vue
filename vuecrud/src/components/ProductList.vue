@@ -2,21 +2,16 @@
   <thead>
     <tr>
       <th>ProductSku</th>
-      <th>ProductName</th>
-      <th>PriceIndia</th>
-      <th>PriceUsa</th>
       <th>Purchase from India</th>
       <th>Purchase from Usa</th>
     </tr>
   </thead>
   <tbody>
-    <tr >
-      <td>vvv</td>
-      <td>sasa</td>
-      <td>sdsd</td>
-      <td>dfdsfs</td>
-      <td><button class="register">India</button></td>
-      <td><button class="register">Usa</button></td>
+    <tr  v-for="(allProducts) in allProduct" v-bind:key="allProducts.key" >
+      <td >{{allProducts.productSku}}</td>
+      <td><button class="register" @click="purchasefromIndia(allProducts)">India</button></td>
+      <td><button class="register" @click="purchasefromUsa(allProducts)">Usa</button></td>
+        <!-- </span> -->
     </tr>
   </tbody>
 </table>
@@ -28,34 +23,66 @@ import global from "../services/local";
 export default {
   data() {
     return {
-      allProduct: [],
+      allProduct: [
+      ]
     };
   },
   created() {
-    TutorialDataService.getAllProduct(this.allProduct, data => {
-      this.allProduct = data.data;
-      
-    });
+    TutorialDataService.getAllProduct(this.allProduct)
+      .then((response) => {
+          console.log("getAllProduct",response.data);
+          this.allProduct=response.data
+          console.log(this.allProduct,"this.allProduct")
+        })
+        .catch((e) => {
+          console.log(e);
+        });
   },
   methods: {
-    // userLogin() {
-    //   console.log("data================")
-    //   var data = {
-    //     email: this.user.email,
-    //     password:this.user.password
-    //   };
-    //   console.log("data",data)
-    //   TutorialDataService.login(data)
-    //     .then((response) => {
-    //       console.log(response.data);
-    //        TutorialDataService.setUserAccess(response.data.accessToken);
-    //          this.$router.push({ name: "productList" });
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // },
-
+    purchasefromIndia(data1) {
+      var data = {
+        productSku: data1.productSku,
+        country:"india"
+      };
+      console.log("data",data)
+      TutorialDataService.purchase(data)
+        .then((response) => {
+          console.log("asasasasa",response.data);
+          if(response.data=="Successfully")
+           alert("Successfully Purchase!!");
+           else if(response.data=="Out of Stock"){
+alert("Out of Stock!!");
+           }
+           else if(response.data=="Out of Stock India"){
+               alert("Out of Stock India!!");
+           }
+            
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+ purchasefromUsa(data2) {
+      var data = {
+        productSku: data2.productSku,
+        country:"usa"
+      };
+      console.log("data",data)
+      TutorialDataService.purchase(data)
+        .then((response) => {
+          if(response.data=="Successfully")
+           alert("Successfully Purchase!!");
+           else if(response.data=="Out of Stock"){
+           alert("Out of Stock!!");
+           }
+           else if(response.data=="Out of Stock Usa"){
+               alert("Out of Stock India!!");
+           }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
     logout() {
      global.removeUserAccess();
       this.$router.replace({ name: "login" });

@@ -17,8 +17,13 @@ class DataService {
         }
       });
     }
-    
- 
+    purchase(data){
+      return http.post("http://localhost:3002/purchaseProduct",data, {
+        headers: {
+          accessToken: global.getUserAccess()
+        }
+      });
+    }
 }
 
 export default new DataService();
