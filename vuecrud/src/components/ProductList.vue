@@ -2,6 +2,9 @@
   <thead>
     <tr>
       <th>ProductSku</th>
+      <th>ProductName</th>
+      <th>PriceIndia</th>
+      <th>PriceUsa</th>
       <th>Purchase from India</th>
       <th>Purchase from Usa</th>
     </tr>
@@ -9,6 +12,9 @@
   <tbody>
     <tr  v-for="(allProducts) in allProduct" v-bind:key="allProducts.key" >
       <td >{{allProducts.productSku}}</td>
+      <td >{{allProducts.value[0].productName}}</td>
+      <td >{{allProducts.value[1].priceInr}}</td>
+      <td >{{allProducts.value[1].priceUsd}}</td>
       <td><button class="register" @click="purchasefromIndia(allProducts)">India</button></td>
       <td><button class="register" @click="purchasefromUsa(allProducts)">Usa</button></td>
         <!-- </span> -->
